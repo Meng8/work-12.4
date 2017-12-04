@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<script type="text/javascript" th:src="@{webjars/jquery/3.2.1/jquery.js}"></script>
+<script type="text/javascript">
+	function find() {
+		$.getJSON("testall", function(result) {
+			console.info(result);
+			var tr = "";
+		 	for(var i = 0 ; i < result.length ; i++){
+				tr += "<tr>";
+				tr += "<td>" + result[i].id + "</td>";
+				tr += "<td>" + result[i].name + "</td>";
+				tr += "<td>" + result[i].size + "</td>";
+				tr += "<td>" + result[i].age + "</td>";
+				tr += "</tr>";
+			}
+			tr += "</table>";
+			$("#tb").html(tr);
+		};
+	};
+	
+	
+	 
+</script> 
+</head>
+<body>
+
+<h2>信息</h2>
+
+    <input type="button" value="后台转json到前台" th:onclick="find()"/>
+    
+	 <table border="1">
+	   <thead>
+	   <tr>
+	    <td width="50px">编号</td>
+	    <td width="50px">姓名</td>
+	    <td width="50px">性别</td>
+	    <td width="50px">年龄</td>
+	   </tr>
+	   </thead>
+	   <tbody id="tr">
+	   </tbody>
+	</table> 
+</body>
+</html>
