@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"> 
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"></meta>
 <title>Insert title here</title>
-<script type="text/javascript" th:src="@{webjars/jquery/3.2.1/jquery.js}"></script>
-<script type="text/javascript">
-	function find() {
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+<script th:inline="javascript">
+
+	function entityToJson(){
+		$.getJSON("getall", { name: "John", id: "123" , size:"男",age:"22"}, function(result){
+			console.info(ok);
+			});
+	}
+	function entryJson() {
 		$.getJSON("testall", function(result) {
+			console.info(ok);
 			console.info(result);
-			var tr = "";
-		 	for(var i = 0 ; i < result.length ; i++){
+		 	for(var i in result){
 				tr += "<tr>";
 				tr += "<td>" + result[i].id + "</td>";
 				tr += "<td>" + result[i].name + "</td>";
@@ -17,12 +23,9 @@
 				tr += "<td>" + result[i].age + "</td>";
 				tr += "</tr>";
 			}
-			tr += "</table>";
-			$("#tb").html(tr);
-		};
+			$("#tr").add(tr);
+		});
 	};
-	
-	
 	 
 </script> 
 </head>
@@ -30,7 +33,8 @@
 
 <h2>信息</h2>
 
-    <input type="button" value="后台转json到前台" th:onclick="find()"/>
+    <input type="button" value="后台到前台" onclick="entityJson()"/>
+    <input type="button" value="前台到后台" onclick="jsonEntity()"/>
     
 	 <table border="1">
 	   <thead>
@@ -42,6 +46,7 @@
 	   </tr>
 	   </thead>
 	   <tbody id="tr">
+	   
 	   </tbody>
 	</table> 
 </body>
